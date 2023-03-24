@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import HomeLi from "@components/HomeLi/HomeLi";
+import HomeLi from "@components/Home/HomeLi";
 
 const Home = () => {
   const [menu] = useState([
@@ -16,7 +16,20 @@ const Home = () => {
       path: "error",
     },
   ]);
-  return <HomeLi menu={menu} />;
+  const [selectedLi, setSelectedLi] = useState(0);
+  const onSelectLi = (index) => {
+    console.log(index);
+    setSelectedLi(index)
+  }
+  return (
+    <div>
+      <HomeLi
+        selectedLi={selectedLi}
+        onSelectLi={onSelectLi}
+        menu={menu}
+      />
+    </div>
+  );
 };
 
 export default Home;

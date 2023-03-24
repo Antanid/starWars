@@ -1,0 +1,36 @@
+.ul_menu {
+    list-style: none;
+    display: flex;
+
+    line-height: 1.7;
+    text-shadow: 0 0 2px var(--color-black);
+    font-size: 26px;
+    color: var(--theme-default-header);
+    transition: color var(--transition);
+
+    .link_li {
+        text-decoration: none;
+        padding-right: var(--spacing-large);
+        width: 90px;
+        li {
+            text-shadow: var(--text-shadow-yellow);
+            text-align: center;
+            line-height: 1.7;
+            font-size: 25px;
+            color: var(--color-white);
+            transition: var(--transition);
+            border: 1px aqua transparent;
+            &.active {
+                text-shadow: none;
+                border: 1px var(--color-violet) solid;
+                border-radius: 10px;
+                color: var(--color-violet);
+            }
+        }
+    }
+}
+.changeTheme {
+    color: var(--theme-default-header);
+    font-size: 30px;
+    margin: var(--spacing-large);
+}

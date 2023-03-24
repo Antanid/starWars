@@ -7,10 +7,11 @@ import { setPeople } from "@redux/peopleSlice";
 import { SWAPI_ROOT, SWAPI_PEOPLE } from "@services/network";
 import { getId, getPeopleIdImage } from "@services/getPeopleData";
 import ErrorPage from "@components/Error/ErrorPage";
-import PeoplePage from "./pages/PeoplePage/PeoplePage";
+import PeoplePage from "@pages/PeoplePage/PeoplePage";
+import Home from "@pages/Home/Home";
 
 import style from "@styles/App.module.css";
-import Home from "./pages/Home/Home";
+import HomeThemeChange from "@components/Home/HomeThemeChange";
 
 function App() {
   const [errorApi, setErrorApi] = useState(false);
@@ -40,9 +41,11 @@ function App() {
   }, []);
 
   return (
-    <div className={style.header}>
+    <div className={style.wrapper}>
       <Home />
       <Routes>
+      
+      <Route path="" element={<HomeThemeChange />} />
       <Route path="error" element={<ErrorPage />} />
         {errorApi ? (
           <Route path="error" element={<ErrorPage />} />

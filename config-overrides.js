@@ -7,7 +7,7 @@ module.exports = function override(config, env) {
     "@redux": "src/redux",
     "@services": "src/services",
     "@styles": "src/styles",
-
+    "@styles": "src/styles",
   })(config);
   return config;
 };

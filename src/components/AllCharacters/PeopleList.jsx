@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import style from "./PeoplePage.module.scss";
 
 const PeopleList = ({ peopleArray }) => {
+  console.log(peopleArray)
   return (
     <ul className={style.list_container}>
       {peopleArray.map(({ name, id, img }) => {
@@ -19,6 +20,13 @@ const PeopleList = ({ peopleArray }) => {
   );
 };
 
-
+PeopleList.propTypes = {
+  peopleArray: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    url: PropTypes.string,
+    img: PropTypes.string,
+  }))
+}
 
 export default PeopleList;
