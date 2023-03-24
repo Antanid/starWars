@@ -6,5 +6,3 @@ export const store = configureStore({
         peopleSlice
     }
 })
-
-export type RootState = ReturnType<typeof store.getState>

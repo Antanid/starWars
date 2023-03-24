@@ -1,43 +1,57 @@
-import { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { SWAPI_ROOT, SWAPI_PEOPLE } from "./services/network";
-import style from "./styles/App.module.css";
-import { useDispatch, useSelector } from "react-redux/es/exports";
-import { setPeople } from './redux/peopleSlice';
-import PeoplePage from "./pages/PeoplePages";
-import { getId, getPeopleIdImage } from './services/getPeopleData';
+import { useDispatch } from "react-redux/es/exports";
+
+import { setPeople } from "@redux/peopleSlice";
+import { SWAPI_ROOT, SWAPI_PEOPLE } from "@services/network";
+import { getId, getPeopleIdImage } from "@services/getPeopleData";
+import ErrorPage from "@components/Error/ErrorPage";
+import PeoplePage from "./pages/PeoplePage/PeoplePage";
+
+import style from "@styles/App.module.css";
+import Home from "./pages/Home/Home";
 
 function App() {
+  const [errorApi, setErrorApi] = useState(false);
   const dispatch = useDispatch();
-  const t = useSelector((state) => state.peopleSlice.people);
   useEffect(() => {
-    try {
-      const getApiResourse = async (url) => {
+    async function getApiResourse(url) {
+      try {
         const { data } = await axios.get(url);
-        const peopleList = data.results.map(({ name, url}) => {
-          const id = getId(url)
-          const img = getPeopleIdImage(id)
+        const peopleList = data.results.map(({ name, url }) => {
+          const id = getId(url);
+          const img = getPeopleIdImage(id);
           return {
-            name, 
+            name,
             url,
             img,
-            id
-          }
+            id,
+          };
         });
-        dispatch(setPeople(peopleList))
-      };
-     
-      getApiResourse(SWAPI_ROOT + SWAPI_PEOPLE);
-    } catch (error) {
-      console.log(error);
+        setErrorApi(false);
+        dispatch(setPeople(peopleList));
+      } catch (error) {
+        setErrorApi(true);
+        console.log("FUCK", error);
+      }
     }
+    getApiResourse(SWAPI_ROOT + SWAPI_PEOPLE);
   }, []);
-  return <div className={style.header}>
-    {
-      t &&
-      <PeoplePage t={t} />
-    }
-  </div>;
+
+  return (
+    <div className={style.header}>
+      <Home />
+      <Routes>
+      <Route path="error" element={<ErrorPage />} />
+        {errorApi ? (
+          <Route path="error" element={<ErrorPage />} />
+        ) : (
+          <Route path="people" element={<PeoplePage />} />
+        )}
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
