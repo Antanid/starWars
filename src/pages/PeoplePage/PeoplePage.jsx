@@ -1,12 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux/es/exports";
-import PeopleList from "@components/AllCharacters/PeopleList";
+import PeopleMain from "../../components/AllCharacters/PeopleMain";
 
-const PeoplePage = () => {
-    const peopleArray = useSelector((state) => state.peopleSlice.people);
+const PeoplePage = ({ setPages, pages }) => {
   return (
     <>
-      <PeopleList peopleArray={peopleArray} />
+      <PeopleMain
+        setPages={setPages}
+        pages={pages}
+      />
     </>
   );
 };

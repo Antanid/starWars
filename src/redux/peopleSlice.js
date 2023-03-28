@@ -2,17 +2,26 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   people: [],
+  page: 1,
+  nextPage: '',
+  prevPage: ''
 };
 
 const peopleSlice = createSlice({
-  name: "PizzaSlice",
+  name: "people",
   initialState,
   reducers: {
     setPeople(state, action) {
-    state.people = action.payload
+      state.people = action.payload
+    },
+    nextPage(state, action) {
+      state.page = action.payload
+    },
+    prevPage(state, action) {
+      state.page = action.payload
     }
   },
 });
 
-export const {setPeople} = peopleSlice.actions;
+export const { setPeople, nextPage, prevPage } = peopleSlice.actions;
 export default peopleSlice.reducer;

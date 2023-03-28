@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+
 import style from "./Home.module.scss";
 
 const HomeLi = ({ menu, onSelectLi, selectedLi }) => {
+
   return (
     <div>
       <ul className={style.ul_menu}>
@@ -12,7 +14,7 @@ const HomeLi = ({ menu, onSelectLi, selectedLi }) => {
             className={style.link_li}
             onClick={() => onSelectLi(index)}
             key={index}
-            to={item.path}>
+            to={item.path === 'people/?page=' ? item.path : item.path}>
             <li className={index === selectedLi ? style.active : ''}>{item.title}</li>
           </Link>
         ))}

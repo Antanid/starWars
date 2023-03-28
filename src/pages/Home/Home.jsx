@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import HomeLi from "@components/Home/HomeLi";
 
 const Home = () => {
+
   const [menu] = useState([
     {
       title: "Home",
@@ -9,16 +10,20 @@ const Home = () => {
     },
     {
       title: "People",
-      path: "people",
+      path: 'people/?page=',
     },
     {
       title: "Error",
       path: "error",
     },
+    {
+      title: "Not Found",
+      path: "NotFound",
+    },
   ]);
+
   const [selectedLi, setSelectedLi] = useState(0);
   const onSelectLi = (index) => {
-    console.log(index);
     setSelectedLi(index)
   }
   return (
