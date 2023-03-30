@@ -8,10 +8,14 @@
 
   --border-radius-small: 3px;
 
+  --spacing-ultrasmall: 5px;
+  --spacing-small:      10px;
   --spacing-medium: 20px;
   --spacing-large: 30px;
 
+
   --fonst-size-main: 16px;
+  --font-size-subheader: 18px;
 
   --transition: 0.4s;
 
@@ -22,7 +26,7 @@
     0 0 2px var(--color-white),
     0 0 40px var(--color-blue);
 
-
+    --margin-list: 7px;
     
   --theme-default-header: #cccc46;
   --theme-default-bagImage: url('../assets/bg.jpg')

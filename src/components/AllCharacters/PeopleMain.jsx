@@ -1,5 +1,7 @@
-import React from 'react';
-import { useSelector } from "react-redux/es/exports";
+import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import { setCharacter, setDeleteFilms, setId } from '../../redux/characterSlice';
 import ButtonPage from './ButtonPage';
 import PeopleList from './PeopleList';
 
@@ -7,7 +9,11 @@ import style from "./PeoplePage.module.scss";
 
 const PeopleMain = ({ setPages, pages }) => {
     const peopleArray = useSelector((state) => state.peopleSlice.people);
+    const dispatch = useDispatch();
 
+    useEffect(() => {
+dispatch(setDeleteFilms())
+    }, [])
 
     const onNextPage = () => {
         if (pages < 9) {
@@ -20,6 +26,15 @@ const PeopleMain = ({ setPages, pages }) => {
         }
     }
 
+    const onChangePerson = (id) => {
+        async function getApiPerson(id) {
+            const { data } = await axios.get(`https://swapi.dev/api/people/${id}`)
+            dispatch(setCharacter(data))
+            dispatch(setId(id))
+        }
+        getApiPerson(id);
+    }
+
     return (
         <div className={style.page_container}>
             <ButtonPage
@@ -28,7 +43,10 @@ const PeopleMain = ({ setPages, pages }) => {
                 onPrevPage={onPrevPage}
                 onNextPage={onNextPage}
             />
-            <PeopleList peopleArray={peopleArray} />
+            <PeopleList
+                onChangePerson={onChangePerson}
+                peopleArray={peopleArray}
+            />
         </div>
     )
 }

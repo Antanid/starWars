@@ -1,7 +1,7 @@
 import { Route, Routes, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux/es/exports";
+import { useDispatch, useSelector } from "react-redux/es/exports";
 
 import { setPeople } from "@redux/peopleSlice";
 import { SWAPI_ROOT, SWAPI_PEOPLE } from "@services/network";
@@ -14,10 +14,12 @@ import style from "@styles/App.module.css";
 import HomeThemeChange from "@components/Home/HomeThemeChange";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import { NEXT_PAGE } from "./services/network";
+import SinglePerson from "./pages/SinglePerson/SinglePerson";
 
 function App() {
   const [errorApi, setErrorApi] = useState(false);
   const dispatch = useDispatch();
+  const charecterID = useSelector(state => state.characterSlice.id)
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [pages, setPages] = useState(1);
@@ -36,7 +38,6 @@ function App() {
             id,
           };
         });
-        console.log('DATA', data)
         setErrorApi(false);
         dispatch(setPeople(peopleList));
         setSearchParams({ page: pages })
@@ -57,6 +58,7 @@ function App() {
         <Route path="*" exact={false} element={<NotFoundPage />} />
         <Route path="/Not Found" element={<NotFoundPage />} />
         <Route path="error" element={<ErrorPage />} />
+        <Route path={`character/${charecterID}`} exact={false} element={<SinglePerson />} />
         {errorApi ? (
           <Route path="error" element={<ErrorPage />} />
         ) : (

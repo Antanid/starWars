@@ -1,0 +1,16 @@
+.wrapper {
+    --color-name: var(--color-violet);
+    margin-top: 45px;
+    margin-left: 40px;
+    .person__name {
+        padding: var(--spacing-small);
+        border-radius: var(--border-radius-small) var(--border-radius-small) var(--border-radius-small) 0;
+        font-size: var(--font-size-subheader);
+        font-weight: 600;
+        color: var(--color-white);
+        background-color: var(--color-violet);
+    }
+    .container{
+        display: flex;
+    }
+}

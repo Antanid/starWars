@@ -2,7 +2,7 @@ import React from 'react';
 
 import style from "./PeoplePage.module.scss";
 
-const ButtonPage = ({ onNextPage, onPrevPage, peopleArray, pages }) => {
+const ButtonPage = ({ onNextPage, onPrevPage, pages }) => {
     return (
         <div className={style.buttonPage}>
             <button
