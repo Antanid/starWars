@@ -3,8 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   people: [],
   page: 1,
-  nextPage: '',
-  prevPage: ''
+  loading: false
 };
 
 const peopleSlice = createSlice({
@@ -19,9 +18,12 @@ const peopleSlice = createSlice({
     },
     prevPage(state, action) {
       state.page = action.payload
+    },
+    setLoading(state, action) {
+      state.loading = action.payload
     }
   },
 });
 
-export const { setPeople, nextPage, prevPage } = peopleSlice.actions;
+export const { setPeople, nextPage, prevPage, setLoading } = peopleSlice.actions;
 export default peopleSlice.reducer;

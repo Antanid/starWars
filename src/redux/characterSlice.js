@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     character: [],
     id: '',
-    films: []
+    films: [],
+    loading: false
 };
 
 const characterSlice = createSlice({
@@ -24,9 +25,12 @@ const characterSlice = createSlice({
         },
         setDeleteFilms(state) {
             state.films = []
-        }
+        },
+        setCharecLoading(state, action) {
+            state.loading = action.payload
+        },
     }
 });
 
-export const { setCharacter, setId, setFilms, setDeleteFilms} = characterSlice.actions;
+export const { setCharacter, setId, setFilms, setDeleteFilms, setCharecLoading} = characterSlice.actions;
 export default characterSlice.reducer;

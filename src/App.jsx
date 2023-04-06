@@ -15,16 +15,19 @@ import HomeThemeChange from "@components/Home/HomeThemeChange";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import { NEXT_PAGE } from "./services/network";
 import SinglePerson from "./pages/SinglePerson/SinglePerson";
+import Favorite from "./components/Favorite/Favorite";
+import { setLoading } from "./redux/peopleSlice";
+import SearchPage from "./pages/Search/SearchPage";
 
 function App() {
   const [errorApi, setErrorApi] = useState(false);
+  const charecterID = useSelector(state => state.characterSlice.id);
   const dispatch = useDispatch();
-  const charecterID = useSelector(state => state.characterSlice.id)
-
   const [searchParams, setSearchParams] = useSearchParams();
-  const [pages, setPages] = useState(1);
+  const [pages, setPages] = useState();
 
   useEffect(() => {
+    dispatch(setLoading(true))
     async function getApiResourse(url) {
       try {
         const { data } = await axios.get(url);
@@ -39,32 +42,34 @@ function App() {
           };
         });
         setErrorApi(false);
-        dispatch(setPeople(peopleList));
+        dispatch(setLoading(false))
         setSearchParams({ page: pages })
+        dispatch(setPeople(peopleList));
       } catch (error) {
         setErrorApi(true);
         console.log("OOPS we have error", error);
       }
     }
-    getApiResourse(SWAPI_ROOT + SWAPI_PEOPLE + NEXT_PAGE + searchParams.get('page') );
-  }, [searchParams, dispatch, setSearchParams, pages]);
+    getApiResourse(SWAPI_ROOT + SWAPI_PEOPLE + NEXT_PAGE + searchParams.get('page'));
+  }, [searchParams, setSearchParams, pages, dispatch]);
 
   return (
     <div className={style.wrapper}>
       <Home />
       <Routes>
-
         <Route path="/" element={<HomeThemeChange />} />
         <Route path="*" exact={false} element={<NotFoundPage />} />
         <Route path="/Not Found" element={<NotFoundPage />} />
         <Route path="error" element={<ErrorPage />} />
+        <Route path="search" element={<SearchPage />} />
         <Route path={`character/${charecterID}`} exact={false} element={<SinglePerson />} />
+        <Route path="favorite" element={<Favorite />} />
         {errorApi ? (
           <Route path="error" element={<ErrorPage />} />
         ) : (
-          <Route path='people' element={<PeoplePage 
+          <Route path='people' element={<PeoplePage
             pages={pages}
-            setPages={setPages}/>} />
+            setPages={setPages} />} />
         )}
       </Routes>
     </div>

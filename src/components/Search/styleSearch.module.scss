@@ -1,0 +1,52 @@
+.search_wrapper {
+    .textH2 {
+        font-size: 26px;
+        color: #cccc46;
+    }
+    .div_input {
+        background-color: white;
+        width: 200px;
+        border: none;
+        position: relative;
+        input {
+            min-width: 210px;
+            padding: 10px 15px;
+            border: #dfe2df 3px solid;
+            outline: none;
+            border-radius: 5px;
+        }
+        img {
+            top: 4px;
+            right: -45px;
+            cursor: pointer;
+            position: absolute;
+            width: 15px;
+            border: none;
+            padding: 10px;
+            border: none;
+            outline: none;
+            object-fit: contain;
+            object-position: center center;
+            transition: 0.5s;
+            opacity: 0.5;
+            &:hover {
+                opacity: 1;
+                transition: opacity 0.1s ease-in-out;
+            }
+        }
+    }
+    .ul_people {
+        a {
+            img {
+                object-fit: cover;
+                object-position: top center;
+            }
+            p {
+                text-decoration: none;
+                cursor: pointer;
+                color: #ffffff;
+                text-shadow: var(--text-shadow-blue);
+            }
+        }
+    }
+}

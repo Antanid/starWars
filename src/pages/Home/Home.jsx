@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import HomeLi from "@components/Home/HomeLi";
+import FavoriteHome from "../Favorite/FavoriteHome";
+import style from './styleHome.module.scss'
 
 const Home = () => {
 
@@ -11,6 +13,10 @@ const Home = () => {
     {
       title: "People",
       path: 'people/?page=',
+    },
+    {
+      title: "Search",
+      path: '/search',
     },
     {
       title: "Error",
@@ -27,12 +33,13 @@ const Home = () => {
     setSelectedLi(index)
   }
   return (
-    <div>
+    <div className={style.home_wrapper}>
       <HomeLi
         selectedLi={selectedLi}
         onSelectLi={onSelectLi}
         menu={menu}
       />
+      <FavoriteHome />
     </div>
   );
 };

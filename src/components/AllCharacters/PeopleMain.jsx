@@ -12,7 +12,7 @@ const PeopleMain = ({ setPages, pages }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-dispatch(setDeleteFilms())
+        dispatch(setDeleteFilms())
     }, [])
 
     const onNextPage = () => {
@@ -28,9 +28,13 @@ dispatch(setDeleteFilms())
 
     const onChangePerson = (id) => {
         async function getApiPerson(id) {
-            const { data } = await axios.get(`https://swapi.dev/api/people/${id}`)
-            dispatch(setCharacter(data))
-            dispatch(setId(id))
+            try {
+                const { data } = await axios.get(`https://swapi.dev/api/people/${id}`)
+                dispatch(setCharacter(data))
+                dispatch(setId(id))
+            } catch (error) {
+                console.log(error)
+            }
         }
         getApiPerson(id);
     }
