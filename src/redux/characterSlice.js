@@ -18,6 +18,7 @@ const characterSlice = createSlice({
             state.id = action.payload
         },
         setFilms(state, action) {
+ 
                 state.films = [
                     ...state.films,
                     action.payload

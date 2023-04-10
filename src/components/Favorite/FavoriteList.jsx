@@ -1,7 +1,5 @@
 import React from 'react';
 import style from './favorite.module.scss'
-import { Link } from 'react-router-dom';
-
 
 const FavoriteList = ({ favorite }) => {
     return (

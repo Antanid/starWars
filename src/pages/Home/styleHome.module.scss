@@ -1,4 +1,10 @@
-.home_wrapper{
+.home_wrapper {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+}
+@media (max-width: 890px) {
+    .home_wrapper {
+        display: block;
+    }
+  
 }

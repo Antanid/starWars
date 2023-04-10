@@ -11,7 +11,7 @@ import PeoplePage from "@pages/PeoplePage/PeoplePage";
 import Home from "@pages/Home/Home";
 
 import style from "@styles/App.module.css";
-import HomeThemeChange from "@components/Home/HomeThemeChange";
+import HomeThemeChange from "./components/ThemePage/HomeThemeChange";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import { NEXT_PAGE } from "./services/network";
 import SinglePerson from "./pages/SinglePerson/SinglePerson";
@@ -24,7 +24,7 @@ function App() {
   const charecterID = useSelector(state => state.characterSlice.id);
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [pages, setPages] = useState();
+  const [pages, setPages] = useState(1);
 
   useEffect(() => {
     dispatch(setLoading(true))
@@ -51,7 +51,7 @@ function App() {
       }
     }
     getApiResourse(SWAPI_ROOT + SWAPI_PEOPLE + NEXT_PAGE + searchParams.get('page'));
-  }, [searchParams, setSearchParams, pages, dispatch]);
+  }, [searchParams, setSearchParams, pages]);
 
   return (
     <div className={style.wrapper}>

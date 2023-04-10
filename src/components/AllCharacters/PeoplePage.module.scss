@@ -25,6 +25,7 @@
             }
         }
     }
+   
     .buttonPage {
         display: flex;
         justify-content: center;
@@ -46,5 +47,11 @@
                 text-shadow: var(--text-shadow-yellow);
             }
         }
+    }
+}
+
+@media (max-width: 550px) {
+    .list_container{
+        justify-content: center;
     }
 }
